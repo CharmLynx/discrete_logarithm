@@ -1,19 +1,26 @@
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 
+long long bin_pow(long long a, long long b, long long mod){
+    long long res = 1;
+    a %= mod;
+    while (b > 0) {
+        if (b & 1)
+            res = (res * a) % mod;
+        a = (a * a) % mod;
+        b >>= 1;
+    }
+    return res;
+}
 int main(){
-    int a=4; //генератор
-    int b=16; //елемент
-    int n=23; //порядок
+    long long a=5290; //генератор
+    long long b=29773; //елемент
+    long long n=35521; //порядок
 
-    int x = 0;
-
-    for(int i=1; i<=n-2; i++){
-        if(pow(a,i)==b){
-            x=i;
-            cout<<x<<endl;
+    for(int i=1; i<=n-2; ++i){
+        if(bin_pow(a, i, n) == b){
+            cout<<i<<endl;
             break;
         }
     }
